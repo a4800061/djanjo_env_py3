@@ -1,0 +1,58 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>首营资料电子档案</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="telephone=no" name="format-detection" />  
+    <meta name="description" content="">
+    <meta name="keywords" content="">
+    <meta name="author" content="">
+    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
+   </head>
+<div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+      <div class="header-top-right">
+        {% if user.is_authenticated %}
+        <div class="signin"><span  class="play-icon popup-with-zoom-anim">{{user.username}}</span></div>
+        <div class="signin"><a href="{% url 'logout' %}" class="play-icon popup-with-zoom-anim">注销</a></div>
+        {% endif %}
+        <div class="clearfix"> </div>
+    </div>
+			<div class="page-header">
+				<h1>
+					平台最新收集电子资料
+				</h1>
+			</div>
+				<ol>
+					{% for m in data_count %}
+        <li>
+            &nbsp;&nbsp;{{m.companyname}} - {{m.cate}} <a href="{% url 'download' m.id %}" >下载资料</a>
+        </li>
+        {% endfor %}
+				</ol> 
+		</div>
+	</div>
+</div>
+{% if user.is_authenticated %}
+        <input id="search" type="text" name="danankeyword"/><button class="btn"  id='ss'  type="submit">搜索</button>
+        <input id="result" type="text"  />
+        {% else %}
+        <div class="signin"><h4><strong>想要进行档案搜索，需要先登录</strong></h4></div>
+        <div class="signin"><a href="{% url 'login' %}" ><button class="btn btn-info" type="button">登录</button></a></div>
+{% endif %}
+ <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
+        <script src="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+<script>
+          $(document).ready(function(){
+          $.ajaxSetup({  
+                 data: {csrfmiddlewaretoken: '{{ csrf_token }}' },  
+            });  
+              $("#ss").click(function(){
+                var a = $("#search").val();
+                console.log(a);
+            })
+      })
+      </script>
+      </body>
+    </html>
