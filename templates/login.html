@@ -1,48 +1,80 @@
-<html>
+{% load staticfiles %}
+<!DOCTYPE html>
+<html lang="zh-CN">
   <head>
+    <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
-    <title>药品首营资料电子化平台</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="telephone=no" name="format-detection" />  
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-    <meta name="author" content="">
-    <link href="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/css/bootstrap.min.css" rel="stylesheet">
-   </head>
-<div class="container-fluid">
-	<div class="row-fluid">
-		<div class="span12">
-			<div class="page-header">
-				<h1>
-					药品首营资料电子化平台
-				</h1>
-			</div>
-			<form class="form-horizontal" action='{% url "login" %}' method='POST'>
-			{% csrf_token %}
-				<div class="control-group">
-					<label class="control-label" for="inputEmail" >用户名</label>
-					<div class="controls">
-						<input id="inputEmail" type="text" name="username"/>
-					</div>
-				</div>
-				<div class="control-group">
-					<label class="control-label" for="inputPassword">密码</label>
-					<div class="controls">
-						<input id="inputPassword" type="password" name='password'/>
-					</div>
-				</div>
-				<div class="control-group">
-					<div class="controls">
-						<br /> <button class="btn" type="submit">登陆</button>
-					</div>
-				</div>
-			</form>
-		</div>
-	</div>
-</div>
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="电子档案">
+<meta name="keywords" content="HTML, CSS, JS, JavaScript, framework, bootstrap, front-end, frontend, web development">
+<meta name="author" content="linjie">
+<title>
   
- <script src="http://cdn.bootcss.com/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://cdn.bootcss.com/twitter-bootstrap/2.0.4/bootstrap.min.js"></script>
+    首营资料平台-登录
+  
+</title>
 
-      </body>
-    </html>
+<!-- 最新版本的 Bootstrap 核心 CSS 文件 -->
+<link rel="stylesheet" href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'css/bootstrap-fuzhou.css' %}">
+<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.min.js"></script>
+<!--font-awesome 核心我CSS 文件-->  
+<link href="//cdn.bootcss.com/font-awesome/4.3.0/css/font-awesome.min.css" rel="stylesheet"> 
+<!-- 最新的 Bootstrap 核心 JavaScript 文件 -->
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+</head>
+<body>
+<!--导航  -->
+	<nav class="navbar navbar-default navbar-fixed-top">
+		<div class="container">
+			<!--小屏幕导航按钮-->
+			<div class="navbar-header">
+				<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="/" class="navbar-brand">福州鹭燕首营资料电子平台</a>
+			</div>
+			<!--大屏幕导航按钮-->
+			<div class="navbar-collapse collapse">
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="#home">首页</a></li>
+					<li><a href="{% url 'login' %}" >登录</a></li>
+					{% if user.is_authenticated %}
+					<li class="nav-name"><a href=""> 欢迎您：{{user.username}} </a></li>
+					<li><a href="{% url 'logout' %}">注销</a></li>
+					{% endif %}
+				</ul>
+			</div>
+		</div>
+	</nav>
+	<!-- 导航结束 -->
+<section id="login">	
+	<div class="loginlvjing">	
+		<div class="container">  
+		   <div class="form row">  
+		      <form class="form-horizontal col-sm-offset-3 col-md-offset-3" id="login_form" action='{% url "login" %}' method='POST'>
+		      	{% csrf_token %}
+		      	<h3 class="form-title">用户登录</h3>  
+		      	<div class="col-sm-5 col-md-5">
+					<div class="form-group">
+						<i class="fa fa-user fa-lg"></i>  
+			            <input class="form-control required" type="text" placeholder="Username" name="username" autofocus="autofocus" maxlength="20"/>  
+					</div>
+					<div class="form-group">  
+		                <i class="fa fa-lock fa-lg"></i>  
+		                <input class="form-control required" type="password" placeholder="Password" name="password" maxlength="18"/>  
+		        	</div> 
+		        	<div class="form-group">  
+		                <input type="submit" class="btn btn-success pull-right" value="登录 "/>     
+		            </div>   
+		      	</div>
+		      </form>       
+		   </div>  
+		</div>  
+	</div>
+</section>
+</body>
+</html>

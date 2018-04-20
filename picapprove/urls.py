@@ -24,5 +24,10 @@ urlpatterns = [
     url(r'^logout/$', views.logOut, name="logout"),
     url('data_fresh/(?P<vid>\d+)', views.data_fresh, name="data_fresh"),
     url(r'^media/(?P<vid>\d+)', views.file_down, name="download"),
+    url(r'^search/$', views.search, name="search"),
+    url(r'^get_search_data/$', views.get_search_data, name="get_search_data"),
+    url(r'^upload/$', views.upload_main, name="upload_main"),
+    url(r'^up_search_companyname/$', views.upload_search_companyname, name="upload_search_companyname"),
+    url(r'^testurl/$', views.testurl, name="testurl"),
     url(r'^admin/', admin.site.urls),
 ]

@@ -41,8 +41,11 @@
 			<div class="navbar-collapse collapse">
 				<ul class="nav navbar-nav navbar-right">
 					<li><a href="#home">首页</a></li>
-					<li><a href="index.html">资料搜索</a></li>
-					<li><a href="index.html">资料维护</a></li>
+					<li><a href="{% url 'login' %}" >登录</a></li>
+					{% if user.is_authenticated %}
+					<li> 欢迎您：{{user.username}}</li>
+					<li><a href="{% url 'logout' %}">注销</a></li>
+					{% endif %}
 				</ul>
 			</div>
 		</div>
